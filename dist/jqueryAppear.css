@@ -1,0 +1,15 @@
+[data-appear='appear'], [data-appear='disappear'] {
+  -webkit-transition: opacity .4s linear, -webkit-transform .4s ease-in;
+          transition: opacity .4s linear, transform .4s ease-in; }
+
+[data-appear='appear'] {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0); }
+
+[data-appear='disappear'] {
+  opacity: 0;
+  -webkit-transform: translateY(-2rem);
+      -ms-transform: translateY(-2rem);
+          transform: translateY(-2rem); }
