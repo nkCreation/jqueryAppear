@@ -1,0 +1,13 @@
+[data-appear='appear'], [data-appear='disappear'] {
+	transition: opacity .4s linear, transform .4s ease-in;
+}
+
+[data-appear='appear'] {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+[data-appear='disappear'] {
+	opacity: 0;
+	transform: translateY(-2rem);
+}
