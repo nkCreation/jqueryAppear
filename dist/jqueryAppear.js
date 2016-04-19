@@ -14,9 +14,16 @@ http://www.opensource.org/licenses/mit-license.php
     // an array of positions
 	var arrayPositions = {};
 
-	$.fn.appearJS = function() {
+	$.fn.appearJS = function(settings) {
 		var $this = $(this);
 		var firstTop;
+
+		var defaultSettings = {
+			'visibleGap': 200,
+			'timeOut': 200
+		}
+
+		var finalSettings = $.extend(defaultSettings, settings);
 
 		$this.each(function(){
 		    firstTop = $(this).offset().top;
@@ -35,16 +42,16 @@ http://www.opensource.org/licenses/mit-license.php
 			var pos = $window.scrollTop();
 
 			$this.each(function(){
-				if (($(this).data('firstTop') - $window.height() + 200) < pos) {
+				if (($(this).data('firstTop') - $window.height() + finalSettings.visibleGap) < pos) {
 					// viewport entrance
 					if (!$(this).data('isVisible')) {
 
-						(function(i, that) {
+						(function(i, that, timeout) {
 							setTimeout(function(){
 								that.data('isVisible', true);
 								that.attr('data-appear', 'appear');
-							}, (i * 200));
-						}( $(this).data('indexEl'), $(this) ));
+							}, (i * timeout));
+						}( $(this).data('indexEl'), $(this), finalSettings.timeOut ));
 					}
 				} else {
 					// exit viewport
@@ -56,5 +63,7 @@ http://www.opensource.org/licenses/mit-license.php
 
 		$window.bind('scroll', update).resize(update);
 		update();
+
+		return this;
 	};
 })(jQuery);
